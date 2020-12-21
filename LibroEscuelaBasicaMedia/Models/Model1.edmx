@@ -1,0 +1,732 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LibroDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActividadesDB">
+          <Key>
+            <PropertyRef Name="idActividade" />
+          </Key>
+          <Property Name="idActividade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="idCurso" Type="int" Nullable="false" />
+          <Property Name="idProfesor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AlumnoDB">
+          <Key>
+            <PropertyRef Name="idAlumno" />
+          </Key>
+          <Property Name="idAlumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rutAlumno" Type="int" Nullable="false" />
+          <Property Name="nombreAlumno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoPaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoMaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idApoderado" Type="int" Nullable="false" />
+          <Property Name="idCurso" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AnotacionesDB">
+          <Key>
+            <PropertyRef Name="idAnotaciones" />
+          </Key>
+          <Property Name="idAnotaciones" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTipo" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="idProfesor" Type="int" Nullable="false" />
+          <Property Name="idAlumno" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApoderadoDB">
+          <Key>
+            <PropertyRef Name="idApoderado" />
+          </Key>
+          <Property Name="idApoderado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rutApoderado" Type="int" Nullable="false" />
+          <Property Name="nombreApoderado" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoPaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoMaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CursosDB">
+          <Key>
+            <PropertyRef Name="idCurso" />
+          </Key>
+          <Property Name="idCurso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cursos" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProfesorDB">
+          <Key>
+            <PropertyRef Name="idProfesor" />
+          </Key>
+          <Property Name="idProfesor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rutProfesor" Type="int" Nullable="false" />
+          <Property Name="nombreProfesor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoPaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoMaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idCurso" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolDB">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreRol" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoAnotacionDB">
+          <Key>
+            <PropertyRef Name="idTipo" />
+          </Key>
+          <Property Name="idTipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsuarioDB">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="correo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="contraseña" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idRol" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ActividadesDB_CursosDB">
+          <End Role="CursosDB" Type="Self.CursosDB" Multiplicity="1" />
+          <End Role="ActividadesDB" Type="Self.ActividadesDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CursosDB">
+              <PropertyRef Name="idCurso" />
+            </Principal>
+            <Dependent Role="ActividadesDB">
+              <PropertyRef Name="idCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActividadesDB_ProfesorDB">
+          <End Role="ProfesorDB" Type="Self.ProfesorDB" Multiplicity="1" />
+          <End Role="ActividadesDB" Type="Self.ActividadesDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfesorDB">
+              <PropertyRef Name="idProfesor" />
+            </Principal>
+            <Dependent Role="ActividadesDB">
+              <PropertyRef Name="idProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlumnoDB_ApoderadoDB">
+          <End Role="ApoderadoDB" Type="Self.ApoderadoDB" Multiplicity="1" />
+          <End Role="AlumnoDB" Type="Self.AlumnoDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApoderadoDB">
+              <PropertyRef Name="idApoderado" />
+            </Principal>
+            <Dependent Role="AlumnoDB">
+              <PropertyRef Name="idApoderado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlumnoDB_CursosDB">
+          <End Role="CursosDB" Type="Self.CursosDB" Multiplicity="1" />
+          <End Role="AlumnoDB" Type="Self.AlumnoDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CursosDB">
+              <PropertyRef Name="idCurso" />
+            </Principal>
+            <Dependent Role="AlumnoDB">
+              <PropertyRef Name="idCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnotacionesDB_AlumnoDB">
+          <End Role="AlumnoDB" Type="Self.AlumnoDB" Multiplicity="1" />
+          <End Role="AnotacionesDB" Type="Self.AnotacionesDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlumnoDB">
+              <PropertyRef Name="idAlumno" />
+            </Principal>
+            <Dependent Role="AnotacionesDB">
+              <PropertyRef Name="idAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnotacionesDB_ProfesorDB">
+          <End Role="ProfesorDB" Type="Self.ProfesorDB" Multiplicity="1" />
+          <End Role="AnotacionesDB" Type="Self.AnotacionesDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfesorDB">
+              <PropertyRef Name="idProfesor" />
+            </Principal>
+            <Dependent Role="AnotacionesDB">
+              <PropertyRef Name="idProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnotacionesDB_TipoAnotacionDB">
+          <End Role="TipoAnotacionDB" Type="Self.TipoAnotacionDB" Multiplicity="1" />
+          <End Role="AnotacionesDB" Type="Self.AnotacionesDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAnotacionDB">
+              <PropertyRef Name="idTipo" />
+            </Principal>
+            <Dependent Role="AnotacionesDB">
+              <PropertyRef Name="idTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApoderadoDB_UsuarioDB">
+          <End Role="UsuarioDB" Type="Self.UsuarioDB" Multiplicity="1" />
+          <End Role="ApoderadoDB" Type="Self.ApoderadoDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsuarioDB">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="ApoderadoDB">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesorDB_CursosDB">
+          <End Role="CursosDB" Type="Self.CursosDB" Multiplicity="1" />
+          <End Role="ProfesorDB" Type="Self.ProfesorDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CursosDB">
+              <PropertyRef Name="idCurso" />
+            </Principal>
+            <Dependent Role="ProfesorDB">
+              <PropertyRef Name="idCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesorDB_UsuarioDB">
+          <End Role="UsuarioDB" Type="Self.UsuarioDB" Multiplicity="1" />
+          <End Role="ProfesorDB" Type="Self.ProfesorDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsuarioDB">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="ProfesorDB">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioDB_RolDB">
+          <End Role="RolDB" Type="Self.RolDB" Multiplicity="1" />
+          <End Role="UsuarioDB" Type="Self.UsuarioDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolDB">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="UsuarioDB">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibroDBModelStoreContainer">
+          <EntitySet Name="ActividadesDB" EntityType="Self.ActividadesDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlumnoDB" EntityType="Self.AlumnoDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnotacionesDB" EntityType="Self.AnotacionesDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApoderadoDB" EntityType="Self.ApoderadoDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CursosDB" EntityType="Self.CursosDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfesorDB" EntityType="Self.ProfesorDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolDB" EntityType="Self.RolDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoAnotacionDB" EntityType="Self.TipoAnotacionDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuarioDB" EntityType="Self.UsuarioDB" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ActividadesDB_CursosDB" Association="Self.FK_ActividadesDB_CursosDB">
+            <End Role="CursosDB" EntitySet="CursosDB" />
+            <End Role="ActividadesDB" EntitySet="ActividadesDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActividadesDB_ProfesorDB" Association="Self.FK_ActividadesDB_ProfesorDB">
+            <End Role="ProfesorDB" EntitySet="ProfesorDB" />
+            <End Role="ActividadesDB" EntitySet="ActividadesDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlumnoDB_ApoderadoDB" Association="Self.FK_AlumnoDB_ApoderadoDB">
+            <End Role="ApoderadoDB" EntitySet="ApoderadoDB" />
+            <End Role="AlumnoDB" EntitySet="AlumnoDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlumnoDB_CursosDB" Association="Self.FK_AlumnoDB_CursosDB">
+            <End Role="CursosDB" EntitySet="CursosDB" />
+            <End Role="AlumnoDB" EntitySet="AlumnoDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnotacionesDB_AlumnoDB" Association="Self.FK_AnotacionesDB_AlumnoDB">
+            <End Role="AlumnoDB" EntitySet="AlumnoDB" />
+            <End Role="AnotacionesDB" EntitySet="AnotacionesDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnotacionesDB_ProfesorDB" Association="Self.FK_AnotacionesDB_ProfesorDB">
+            <End Role="ProfesorDB" EntitySet="ProfesorDB" />
+            <End Role="AnotacionesDB" EntitySet="AnotacionesDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnotacionesDB_TipoAnotacionDB" Association="Self.FK_AnotacionesDB_TipoAnotacionDB">
+            <End Role="TipoAnotacionDB" EntitySet="TipoAnotacionDB" />
+            <End Role="AnotacionesDB" EntitySet="AnotacionesDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApoderadoDB_UsuarioDB" Association="Self.FK_ApoderadoDB_UsuarioDB">
+            <End Role="UsuarioDB" EntitySet="UsuarioDB" />
+            <End Role="ApoderadoDB" EntitySet="ApoderadoDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesorDB_CursosDB" Association="Self.FK_ProfesorDB_CursosDB">
+            <End Role="CursosDB" EntitySet="CursosDB" />
+            <End Role="ProfesorDB" EntitySet="ProfesorDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesorDB_UsuarioDB" Association="Self.FK_ProfesorDB_UsuarioDB">
+            <End Role="UsuarioDB" EntitySet="UsuarioDB" />
+            <End Role="ProfesorDB" EntitySet="ProfesorDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioDB_RolDB" Association="Self.FK_UsuarioDB_RolDB">
+            <End Role="RolDB" EntitySet="RolDB" />
+            <End Role="UsuarioDB" EntitySet="UsuarioDB" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LibroDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ActividadesDB">
+          <Key>
+            <PropertyRef Name="idActividade" />
+          </Key>
+          <Property Name="idActividade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idCurso" Type="Int32" Nullable="false" />
+          <Property Name="idProfesor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CursosDB" Relationship="Self.FK_ActividadesDB_CursosDB" FromRole="ActividadesDB" ToRole="CursosDB" />
+          <NavigationProperty Name="ProfesorDB" Relationship="Self.FK_ActividadesDB_ProfesorDB" FromRole="ActividadesDB" ToRole="ProfesorDB" />
+        </EntityType>
+        <EntityType Name="AlumnoDB">
+          <Key>
+            <PropertyRef Name="idAlumno" />
+          </Key>
+          <Property Name="idAlumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rutAlumno" Type="Int32" Nullable="false" />
+          <Property Name="nombreAlumno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idApoderado" Type="Int32" Nullable="false" />
+          <Property Name="idCurso" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ApoderadoDB" Relationship="Self.FK_AlumnoDB_ApoderadoDB" FromRole="AlumnoDB" ToRole="ApoderadoDB" />
+          <NavigationProperty Name="CursosDB" Relationship="Self.FK_AlumnoDB_CursosDB" FromRole="AlumnoDB" ToRole="CursosDB" />
+          <NavigationProperty Name="AnotacionesDB" Relationship="Self.FK_AnotacionesDB_AlumnoDB" FromRole="AlumnoDB" ToRole="AnotacionesDB" />
+        </EntityType>
+        <EntityType Name="AnotacionesDB">
+          <Key>
+            <PropertyRef Name="idAnotaciones" />
+          </Key>
+          <Property Name="idAnotaciones" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipo" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idProfesor" Type="Int32" Nullable="false" />
+          <Property Name="idAlumno" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AlumnoDB" Relationship="Self.FK_AnotacionesDB_AlumnoDB" FromRole="AnotacionesDB" ToRole="AlumnoDB" />
+          <NavigationProperty Name="ProfesorDB" Relationship="Self.FK_AnotacionesDB_ProfesorDB" FromRole="AnotacionesDB" ToRole="ProfesorDB" />
+          <NavigationProperty Name="TipoAnotacionDB" Relationship="Self.FK_AnotacionesDB_TipoAnotacionDB" FromRole="AnotacionesDB" ToRole="TipoAnotacionDB" />
+        </EntityType>
+        <EntityType Name="ApoderadoDB">
+          <Key>
+            <PropertyRef Name="idApoderado" />
+          </Key>
+          <Property Name="idApoderado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rutApoderado" Type="Int32" Nullable="false" />
+          <Property Name="nombreApoderado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AlumnoDB" Relationship="Self.FK_AlumnoDB_ApoderadoDB" FromRole="ApoderadoDB" ToRole="AlumnoDB" />
+          <NavigationProperty Name="UsuarioDB" Relationship="Self.FK_ApoderadoDB_UsuarioDB" FromRole="ApoderadoDB" ToRole="UsuarioDB" />
+        </EntityType>
+        <EntityType Name="CursosDB">
+          <Key>
+            <PropertyRef Name="idCurso" />
+          </Key>
+          <Property Name="idCurso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cursos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ActividadesDB" Relationship="Self.FK_ActividadesDB_CursosDB" FromRole="CursosDB" ToRole="ActividadesDB" />
+          <NavigationProperty Name="AlumnoDB" Relationship="Self.FK_AlumnoDB_CursosDB" FromRole="CursosDB" ToRole="AlumnoDB" />
+          <NavigationProperty Name="ProfesorDB" Relationship="Self.FK_ProfesorDB_CursosDB" FromRole="CursosDB" ToRole="ProfesorDB" />
+        </EntityType>
+        <EntityType Name="ProfesorDB">
+          <Key>
+            <PropertyRef Name="idProfesor" />
+          </Key>
+          <Property Name="idProfesor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rutProfesor" Type="Int32" Nullable="false" />
+          <Property Name="nombreProfesor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idCurso" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActividadesDB" Relationship="Self.FK_ActividadesDB_ProfesorDB" FromRole="ProfesorDB" ToRole="ActividadesDB" />
+          <NavigationProperty Name="AnotacionesDB" Relationship="Self.FK_AnotacionesDB_ProfesorDB" FromRole="ProfesorDB" ToRole="AnotacionesDB" />
+          <NavigationProperty Name="CursosDB" Relationship="Self.FK_ProfesorDB_CursosDB" FromRole="ProfesorDB" ToRole="CursosDB" />
+          <NavigationProperty Name="UsuarioDB" Relationship="Self.FK_ProfesorDB_UsuarioDB" FromRole="ProfesorDB" ToRole="UsuarioDB" />
+        </EntityType>
+        <EntityType Name="RolDB">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreRol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UsuarioDB" Relationship="Self.FK_UsuarioDB_RolDB" FromRole="RolDB" ToRole="UsuarioDB" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoAnotacionDB">
+          <Key>
+            <PropertyRef Name="idTipo" />
+          </Key>
+          <Property Name="idTipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AnotacionesDB" Relationship="Self.FK_AnotacionesDB_TipoAnotacionDB" FromRole="TipoAnotacionDB" ToRole="AnotacionesDB" />
+        </EntityType>
+        <EntityType Name="UsuarioDB">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idRol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ApoderadoDB" Relationship="Self.FK_ApoderadoDB_UsuarioDB" FromRole="UsuarioDB" ToRole="ApoderadoDB" />
+          <NavigationProperty Name="ProfesorDB" Relationship="Self.FK_ProfesorDB_UsuarioDB" FromRole="UsuarioDB" ToRole="ProfesorDB" />
+          <NavigationProperty Name="RolDB" Relationship="Self.FK_UsuarioDB_RolDB" FromRole="UsuarioDB" ToRole="RolDB" />
+        </EntityType>
+        <Association Name="FK_ActividadesDB_CursosDB">
+          <End Role="CursosDB" Type="Self.CursosDB" Multiplicity="1" />
+          <End Role="ActividadesDB" Type="Self.ActividadesDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CursosDB">
+              <PropertyRef Name="idCurso" />
+            </Principal>
+            <Dependent Role="ActividadesDB">
+              <PropertyRef Name="idCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActividadesDB_ProfesorDB">
+          <End Role="ProfesorDB" Type="Self.ProfesorDB" Multiplicity="1" />
+          <End Role="ActividadesDB" Type="Self.ActividadesDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfesorDB">
+              <PropertyRef Name="idProfesor" />
+            </Principal>
+            <Dependent Role="ActividadesDB">
+              <PropertyRef Name="idProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlumnoDB_ApoderadoDB">
+          <End Role="ApoderadoDB" Type="Self.ApoderadoDB" Multiplicity="1" />
+          <End Role="AlumnoDB" Type="Self.AlumnoDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApoderadoDB">
+              <PropertyRef Name="idApoderado" />
+            </Principal>
+            <Dependent Role="AlumnoDB">
+              <PropertyRef Name="idApoderado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlumnoDB_CursosDB">
+          <End Role="CursosDB" Type="Self.CursosDB" Multiplicity="1" />
+          <End Role="AlumnoDB" Type="Self.AlumnoDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CursosDB">
+              <PropertyRef Name="idCurso" />
+            </Principal>
+            <Dependent Role="AlumnoDB">
+              <PropertyRef Name="idCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnotacionesDB_AlumnoDB">
+          <End Role="AlumnoDB" Type="Self.AlumnoDB" Multiplicity="1" />
+          <End Role="AnotacionesDB" Type="Self.AnotacionesDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlumnoDB">
+              <PropertyRef Name="idAlumno" />
+            </Principal>
+            <Dependent Role="AnotacionesDB">
+              <PropertyRef Name="idAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnotacionesDB_ProfesorDB">
+          <End Role="ProfesorDB" Type="Self.ProfesorDB" Multiplicity="1" />
+          <End Role="AnotacionesDB" Type="Self.AnotacionesDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfesorDB">
+              <PropertyRef Name="idProfesor" />
+            </Principal>
+            <Dependent Role="AnotacionesDB">
+              <PropertyRef Name="idProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnotacionesDB_TipoAnotacionDB">
+          <End Role="TipoAnotacionDB" Type="Self.TipoAnotacionDB" Multiplicity="1" />
+          <End Role="AnotacionesDB" Type="Self.AnotacionesDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAnotacionDB">
+              <PropertyRef Name="idTipo" />
+            </Principal>
+            <Dependent Role="AnotacionesDB">
+              <PropertyRef Name="idTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApoderadoDB_UsuarioDB">
+          <End Role="UsuarioDB" Type="Self.UsuarioDB" Multiplicity="1" />
+          <End Role="ApoderadoDB" Type="Self.ApoderadoDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsuarioDB">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="ApoderadoDB">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesorDB_CursosDB">
+          <End Role="CursosDB" Type="Self.CursosDB" Multiplicity="1" />
+          <End Role="ProfesorDB" Type="Self.ProfesorDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CursosDB">
+              <PropertyRef Name="idCurso" />
+            </Principal>
+            <Dependent Role="ProfesorDB">
+              <PropertyRef Name="idCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesorDB_UsuarioDB">
+          <End Role="UsuarioDB" Type="Self.UsuarioDB" Multiplicity="1" />
+          <End Role="ProfesorDB" Type="Self.ProfesorDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsuarioDB">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="ProfesorDB">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioDB_RolDB">
+          <End Role="RolDB" Type="Self.RolDB" Multiplicity="1" />
+          <End Role="UsuarioDB" Type="Self.UsuarioDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolDB">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="UsuarioDB">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibroDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActividadesDB" EntityType="Self.ActividadesDB" />
+          <EntitySet Name="AlumnoDB" EntityType="Self.AlumnoDB" />
+          <EntitySet Name="AnotacionesDB" EntityType="Self.AnotacionesDB" />
+          <EntitySet Name="ApoderadoDB" EntityType="Self.ApoderadoDB" />
+          <EntitySet Name="CursosDB" EntityType="Self.CursosDB" />
+          <EntitySet Name="ProfesorDB" EntityType="Self.ProfesorDB" />
+          <EntitySet Name="RolDB" EntityType="Self.RolDB" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipoAnotacionDB" EntityType="Self.TipoAnotacionDB" />
+          <EntitySet Name="UsuarioDB" EntityType="Self.UsuarioDB" />
+          <AssociationSet Name="FK_ActividadesDB_CursosDB" Association="Self.FK_ActividadesDB_CursosDB">
+            <End Role="CursosDB" EntitySet="CursosDB" />
+            <End Role="ActividadesDB" EntitySet="ActividadesDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActividadesDB_ProfesorDB" Association="Self.FK_ActividadesDB_ProfesorDB">
+            <End Role="ProfesorDB" EntitySet="ProfesorDB" />
+            <End Role="ActividadesDB" EntitySet="ActividadesDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlumnoDB_ApoderadoDB" Association="Self.FK_AlumnoDB_ApoderadoDB">
+            <End Role="ApoderadoDB" EntitySet="ApoderadoDB" />
+            <End Role="AlumnoDB" EntitySet="AlumnoDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlumnoDB_CursosDB" Association="Self.FK_AlumnoDB_CursosDB">
+            <End Role="CursosDB" EntitySet="CursosDB" />
+            <End Role="AlumnoDB" EntitySet="AlumnoDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnotacionesDB_AlumnoDB" Association="Self.FK_AnotacionesDB_AlumnoDB">
+            <End Role="AlumnoDB" EntitySet="AlumnoDB" />
+            <End Role="AnotacionesDB" EntitySet="AnotacionesDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnotacionesDB_ProfesorDB" Association="Self.FK_AnotacionesDB_ProfesorDB">
+            <End Role="ProfesorDB" EntitySet="ProfesorDB" />
+            <End Role="AnotacionesDB" EntitySet="AnotacionesDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnotacionesDB_TipoAnotacionDB" Association="Self.FK_AnotacionesDB_TipoAnotacionDB">
+            <End Role="TipoAnotacionDB" EntitySet="TipoAnotacionDB" />
+            <End Role="AnotacionesDB" EntitySet="AnotacionesDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApoderadoDB_UsuarioDB" Association="Self.FK_ApoderadoDB_UsuarioDB">
+            <End Role="UsuarioDB" EntitySet="UsuarioDB" />
+            <End Role="ApoderadoDB" EntitySet="ApoderadoDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesorDB_CursosDB" Association="Self.FK_ProfesorDB_CursosDB">
+            <End Role="CursosDB" EntitySet="CursosDB" />
+            <End Role="ProfesorDB" EntitySet="ProfesorDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesorDB_UsuarioDB" Association="Self.FK_ProfesorDB_UsuarioDB">
+            <End Role="UsuarioDB" EntitySet="UsuarioDB" />
+            <End Role="ProfesorDB" EntitySet="ProfesorDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioDB_RolDB" Association="Self.FK_UsuarioDB_RolDB">
+            <End Role="RolDB" EntitySet="RolDB" />
+            <End Role="UsuarioDB" EntitySet="UsuarioDB" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LibroDBModelStoreContainer" CdmEntityContainer="LibroDBEntities">
+          <EntitySetMapping Name="ActividadesDB">
+            <EntityTypeMapping TypeName="LibroDBModel.ActividadesDB">
+              <MappingFragment StoreEntitySet="ActividadesDB">
+                <ScalarProperty Name="idActividade" ColumnName="idActividade" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idCurso" ColumnName="idCurso" />
+                <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlumnoDB">
+            <EntityTypeMapping TypeName="LibroDBModel.AlumnoDB">
+              <MappingFragment StoreEntitySet="AlumnoDB">
+                <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
+                <ScalarProperty Name="rutAlumno" ColumnName="rutAlumno" />
+                <ScalarProperty Name="nombreAlumno" ColumnName="nombreAlumno" />
+                <ScalarProperty Name="apellidoPaterno" ColumnName="apellidoPaterno" />
+                <ScalarProperty Name="apellidoMaterno" ColumnName="apellidoMaterno" />
+                <ScalarProperty Name="idApoderado" ColumnName="idApoderado" />
+                <ScalarProperty Name="idCurso" ColumnName="idCurso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnotacionesDB">
+            <EntityTypeMapping TypeName="LibroDBModel.AnotacionesDB">
+              <MappingFragment StoreEntitySet="AnotacionesDB">
+                <ScalarProperty Name="idAnotaciones" ColumnName="idAnotaciones" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
+                <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApoderadoDB">
+            <EntityTypeMapping TypeName="LibroDBModel.ApoderadoDB">
+              <MappingFragment StoreEntitySet="ApoderadoDB">
+                <ScalarProperty Name="idApoderado" ColumnName="idApoderado" />
+                <ScalarProperty Name="rutApoderado" ColumnName="rutApoderado" />
+                <ScalarProperty Name="nombreApoderado" ColumnName="nombreApoderado" />
+                <ScalarProperty Name="apellidoPaterno" ColumnName="apellidoPaterno" />
+                <ScalarProperty Name="apellidoMaterno" ColumnName="apellidoMaterno" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CursosDB">
+            <EntityTypeMapping TypeName="LibroDBModel.CursosDB">
+              <MappingFragment StoreEntitySet="CursosDB">
+                <ScalarProperty Name="idCurso" ColumnName="idCurso" />
+                <ScalarProperty Name="cursos" ColumnName="cursos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfesorDB">
+            <EntityTypeMapping TypeName="LibroDBModel.ProfesorDB">
+              <MappingFragment StoreEntitySet="ProfesorDB">
+                <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
+                <ScalarProperty Name="rutProfesor" ColumnName="rutProfesor" />
+                <ScalarProperty Name="nombreProfesor" ColumnName="nombreProfesor" />
+                <ScalarProperty Name="apellidoPaterno" ColumnName="apellidoPaterno" />
+                <ScalarProperty Name="apellidoMaterno" ColumnName="apellidoMaterno" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idCurso" ColumnName="idCurso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolDB">
+            <EntityTypeMapping TypeName="LibroDBModel.RolDB">
+              <MappingFragment StoreEntitySet="RolDB">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="LibroDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoAnotacionDB">
+            <EntityTypeMapping TypeName="LibroDBModel.TipoAnotacionDB">
+              <MappingFragment StoreEntitySet="TipoAnotacionDB">
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioDB">
+            <EntityTypeMapping TypeName="LibroDBModel.UsuarioDB">
+              <MappingFragment StoreEntitySet="UsuarioDB">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

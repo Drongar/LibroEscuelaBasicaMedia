@@ -1,0 +1,48 @@
+﻿@model List<LibroEscuelaBasicaMedia.Models.ViewModel.ApodereadoViewModel>
+
+@{
+    ViewBag.Title = "Index2";
+}
+
+<h2>Index</h2>
+<div class="row" style="text-align:right;padding:5px;">
+    <a href="~/Tabla/Nuevo" class="btn btn-primary">Nuevo</a>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th></th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td>@oElemento.iduserApoderado</td>
+                    <td>@oElemento.idUser</td>
+                    <td>@oElemento.correo</td>
+                    <td>@oElemento.rutApoderado </td>
+                    <td>@oElemento.nombreApoderado</td>
+                    <td>@oElemento.apellidoPaternoApoderado</td>
+                    <td>@oElemento.apellidoMaternoApoderado</td>
+                    <td>@oElemento.nombreAlumno</td>
+                    <td>@oElemento.rutAlumno</td>
+                    <td>@oElemento.apellidoPaternoAlumno</td>
+                    <td>@oElemento.apellidoMaternoAlumno</td>
+                    <td>@oElemento.idcurso</td>
+                    <td>@oElemento.idRol</td>
+
+
+                    
+
+                </tr>
+
+            }
+
+
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="07ab7cefee254768882efb1ddc467847" Name="Diagram1">
+        <EntityTypeShape EntityType="LibroDBModel.ActividadesDB" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibroDBModel.AlumnoDB" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibroDBModel.AnotacionesDB" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibroDBModel.ApoderadoDB" Width="1.5" PointX="3.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibroDBModel.CursosDB" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibroDBModel.ProfesorDB" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibroDBModel.RolDB" Width="1.5" PointX="1.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibroDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibroDBModel.TipoAnotacionDB" Width="1.5" PointX="6" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibroDBModel.UsuarioDB" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="LibroDBModel.FK_ActividadesDB_CursosDB" ManuallyRouted="false" />
+        <AssociationConnector Association="LibroDBModel.FK_ActividadesDB_ProfesorDB" ManuallyRouted="false" />
+        <AssociationConnector Association="LibroDBModel.FK_AlumnoDB_ApoderadoDB" ManuallyRouted="false" />
+        <AssociationConnector Association="LibroDBModel.FK_AlumnoDB_CursosDB" ManuallyRouted="false" />
+        <AssociationConnector Association="LibroDBModel.FK_AnotacionesDB_AlumnoDB" ManuallyRouted="false" />
+        <AssociationConnector Association="LibroDBModel.FK_AnotacionesDB_ProfesorDB" ManuallyRouted="false" />
+        <AssociationConnector Association="LibroDBModel.FK_AnotacionesDB_TipoAnotacionDB" ManuallyRouted="false" />
+        <AssociationConnector Association="LibroDBModel.FK_ApoderadoDB_UsuarioDB" ManuallyRouted="false" />
+        <AssociationConnector Association="LibroDBModel.FK_ProfesorDB_CursosDB" ManuallyRouted="false" />
+        <AssociationConnector Association="LibroDBModel.FK_ProfesorDB_UsuarioDB" ManuallyRouted="false" />
+        <AssociationConnector Association="LibroDBModel.FK_UsuarioDB_RolDB" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

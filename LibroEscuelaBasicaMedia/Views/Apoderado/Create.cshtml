@@ -1,0 +1,83 @@
+﻿@model LibroEscuelaBasicaMedia.Models.ViewModel.ApodereadoViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<h2>Formulario Apoderado-Alumno</h2>
+
+@using (Html.BeginForm("Create", "Apoderado", FormMethod.Post))
+{ 
+
+
+<div class="row">
+    <h2>Datos Apoderado</h2>
+    <div class="form-group">
+        <label>Correo</label>
+        @Html.TextBoxFor(d => d.correo)
+    </div>
+    <div class="form-group">
+        <label>Contraseña</label>
+        @Html.TextBoxFor(d => d.contraseña)
+
+    </div>
+    <div class="form-group">
+        <label>Curso</label>
+        @Html.DropDownListFor(d => d.idRol, null)
+    </div>
+    <div class="form-group">
+        <label>Rut Apoderado</label>
+        @Html.TextBoxFor(d => d.rutApoderado)
+
+    </div>
+    <div class="form-group">
+        <label>Nombre Apoderado</label>
+        @Html.TextBoxFor(d => d.nombreApoderado)
+
+    </div>
+    <div class="form-group">
+        <label>Apellido Paterno</label>
+        @Html.TextBoxFor(d => d.apellidoPaternoApoderado)
+
+    </div>
+    <div class="form-group">
+        <label>Apellido Materno</label>
+        @Html.TextBoxFor(d => d.apellidoMaternoApoderado)
+
+
+
+    </div>
+    <h2>Datos Alumno</h2>
+    <div class="form-group">
+        <label>Rut Alumno</label>
+        @Html.TextBoxFor(d => d.rutAlumno)
+
+    </div>
+    <div class="form-group">
+        <label>Nombre Alumno</label>
+        @Html.TextBoxFor(d => d.nombreAlumno)
+
+    </div>
+    <div class="form-group">
+        <label>Apellido Paterno</label>
+        @Html.TextBoxFor(d => d.apellidoPaternoAlumno)
+    </div>
+
+    <div class="form-group">
+        <label>Apellido Materno</label>
+        @Html.TextBoxFor(d => d.apellidoMaternoAlumno)
+
+    </div>
+    <div class="form-group">
+        <label>Curso</label>
+        @Html.DropDownListFor(m => m.idcurso, null)
+
+    </div>
+    <div class="form-group">
+        <input type="submit" />
+
+    </div>
+</div>
+
+    }
